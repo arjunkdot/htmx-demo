@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTMX Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  </head>
+  <body>
+    <div hx-boost="true" hx-target="#content">
+      <h1>HTML.ORG</h1>
+      <nav>
+        <ul>
+          <li><a a href="/index.html">Home</a></li>
+          <li><a a href="/test.html">Test</a></li>
+        </ul>
+      </nav>
+      <div id="content">
+        <article>
+          <input type="email" name="email" />
+          <form>
+            <input type="text" name="firstname" />
+            <input type="text" name="lasstname" />
+            <button
+              hx-post="https://dummyjson.com/products/add/"
+              hx-swap="outerHTML"
+              hx-trigger="click"
+              hx-target="#searchbox"
+              hx-include="[name='email']"
+              hx-vars="{'name': 'Larry'}"
+              hx-params="not email"
+              hx-confirm="Are you sure want to send this information?">
+              Send
+              <span class="htmx-indicator">(Loading...)</span>
+            </button>
+          </form>
+        </article>
+        <div id="searchbox">
+          <textarea id="search"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://unpkg.com/htmx.org@1.9.9"
+      integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX"
+      crossorigin="anonymous"></script>
+    <script>
+      document.body.addEventListener("htmx:configRequest", function (e) {
+        e.detail.parameters["auth_token"] = "Hx2910013282";
+      });
+    </script>
+  </body>
+</html>
